@@ -46,7 +46,6 @@ void setup()
   // Detection of the standing light values moved to the pre-arm warning of the laser
   
   unsigned long time=millis();
-  bool warningSounded=false;
   
   // Ensure that the laser is not armed on powerup
   while(digitalRead(LaserArm)){
