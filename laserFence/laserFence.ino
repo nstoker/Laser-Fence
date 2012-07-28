@@ -45,30 +45,44 @@ void setup()
   
   // Detection of the standing light values moved to the pre-arm warning of the laser
   
-  unsigned long time=millis();
+  unsigned long time=0;
   
-  // Ensure that the laser is not armed on powerup
-  while(digitalRead(LaserArm)){
-    
+  bool safetyCheck=true;    // Flag to warn of setup errors - false if safe to continue
+  bool alerted=false; // Flag to repeat alarm
+  
+  // Ensure that the laser is not armed on powerup, and RunMode setup
+  while(safetyCheck){
+    safetyCheck = digitalRead(LaserArm) || digitalRead(RunMode);
+
     // Set red led only
+    digitalWrite(AlarmLamp,HIGH); // Put the lamp on
     digitalWrite(RedLED,HIGH);
     digitalWrite(GreenLED,LOW);
     
-    // Check to see if timeout has expired
-    if(millis()>time+2500){
-      digitalWrite(AlarmLamp,HIGH); // Put the lamp on
-      sendMorse('W'); // Warning!
-      time=millis();
+    // Sound the alerts
+    if(!alerted) {
+      if(digitalRead(LaserArm)==false){
+        sendMorse('L');
+      }
+      if(digitalRead(RunMode)==false){
+        sendMorse('M');
+      }
+      alerted=true;
+      time=millis()+3000; // How long to wait before repeating warnings
     }
     
-    // And sleep 
-    delay(500); 
+    // Check for timeout
+    if(time>millis()){
+      alerted=false;
+    }
   }
 }
 
 void loop()
 {
-  //
+  if(digitalRead(LaserArm)){
+    // Laser live, check setup 
+  }
 }
 
 void sendMorse(const char msg)
