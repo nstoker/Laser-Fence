@@ -15,8 +15,11 @@
  PD2 Green section of bi-colour led
  PD3 Red section of bi-colour led
  PD5 BuzzerDriver
- 
- */
+
+*/
+
+#include "Morse.h"
+
 // Inputs
 const int LaserPointer = 0; // PD0 OUTPUT 
 const int AlarmLamp = 1;    // PD1 OUTPUT  
@@ -29,7 +32,7 @@ const int LaserArm = 6;     // PD6 INPUT - Goes low when armed
 const int LaserDetect = 0;  // PC0 INPUT Laser detector
 
 
-void sendMorse(const char msg);
+Morse morse(Buzzer,12,0);  // Params Pin, speed, 0 = toggle
 
 void setup()
 {
@@ -62,10 +65,10 @@ void setup()
     // Sound the alerts
     if(!alerted) {
       if(digitalRead(LaserArm)==false){
-        sendMorse('L');
+        morse.send('L');
       }
       if(digitalRead(RunMode)==false){
-        sendMorse('M');
+        morse.send('M');
       }
       alerted=true;
       time=millis()+3000; // How long to wait before repeating warnings
@@ -85,7 +88,4 @@ void loop()
   }
 }
 
-void sendMorse(const char msg)
-{
-  // TO DO
-}
+
