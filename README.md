@@ -9,7 +9,7 @@ The hardware is going to be added to the repository once I iron out any bugs in 
 
 I am currently using Eagle, until I find a suitable tool that runs under osx and linux.
 
-The hardware is © N Stoker 2010, and is licenced under
+The hardware is © N Stoker 2010, and is licensed under the TAPR OHL 
 
 Firmware
 ========
