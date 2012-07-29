@@ -2,7 +2,19 @@
  A laser fence detection system 
  Copyright Neil Stoker 2012
  Licenced under the GPL v3 (or later)  http://www.gnu.org/licenses/gpl.txt
- 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
  CIRCUIT
  Inputs
  PD6 covered switch to activte laser
@@ -125,6 +137,15 @@ void loop()
     } 
     else {
       // RunMode is low, so we're playing for real
+      if( !beamDetected()){
+        digitalWrite(AlarmLamp,true);
+        digitalWrite(Buzzer,true);
+      } 
+      else {
+        // Beam still on
+        digitalWrite(AlarmLamp,false);
+        digitalWrite(Buzzer,false);
+      }
     } 
   }
   else {
@@ -134,6 +155,7 @@ void loop()
     setLED(true,false); // Set green lamp
   }
 }
+
 
 
 
