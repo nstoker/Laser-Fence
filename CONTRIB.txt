@@ -1,0 +1,8 @@
+Initial hardware designs and code by N Stoker 2012.
+
+Initial build
+0.0.1 
+Changes to the Arduino Morse library should be passed to the developers
+Erik Linder SM0RVV and Mark VandeWettering K6HX
+Contact: sm0rvv at google mail 
+
