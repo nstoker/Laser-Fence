@@ -1,7 +1,7 @@
 /* 
  A laser fence detection system 
  Copyright Neil Stoker 2012
- Licenced under the GPL v3 (or later)  http://www.gnu.org/licenses/gpl.txt
+ Licenced under the GPL v3 http://www.gnu.org/licenses/gpl.txt
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -17,7 +17,7 @@
     
  CIRCUIT
  Inputs
- PD6 covered switch to activte laser
+ PD6 covered switch to activate laser
  PD4 pushbutton to control RunMode (either setup or run)
  PC0 phototransistor to detect laser beam
  
@@ -73,7 +73,6 @@ bool beamDetected(void){
 void setup()
 {
   // Initialise the ports to input/outputs and check laser not armed before proceeding
-
   pinMode(0,OUTPUT);
   pinMode(1,OUTPUT);
   pinMode(2,OUTPUT);
@@ -83,7 +82,6 @@ void setup()
   pinMode(6,INPUT);
 
   // Detection of the standing light values moved to the pre-arm warning of the laser
-
   unsigned long time=0;
 
   bool safetyCheck=true;    // Flag to warn of setup errors - false if safe to continue
@@ -93,7 +91,6 @@ void setup()
   while(safetyCheck){
     safetyCheck = digitalRead(LaserArm) || digitalRead(RunMode);
 
-    // Set red led only
     digitalWrite(AlarmLamp,HIGH); // Put the lamp on
     digitalWrite(RedLED,HIGH);
     digitalWrite(GreenLED,LOW);
@@ -111,7 +108,7 @@ void setup()
     }
 
     // Check for timeout
-    if(time>millis()){
+    if(time<=millis()){
       alerted=false;
     }
   }
